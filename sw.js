@@ -1,4 +1,4 @@
-const nombreCache = 'apv-v3101131023';
+const nombreCache = 'apv-v7';
 
 const archivos = [
     "/",
@@ -34,6 +34,7 @@ self.addEventListener('activate', e => {
     caches.keys()
         .then(keys => {
             return Promise.all(
+                console.log('Borrando cachés'),
                 keys.filter( key => key !== nombreCache )
                 .map( key => caches.delete(key)) // Borra las versiones anteriores
             )
