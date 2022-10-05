@@ -1,4 +1,4 @@
-const nombreCache = 'apv-v1';
+const nombreCache = 'apv-v3101131023';
 
 const archivos = [
     "/",
@@ -29,7 +29,16 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
     console.log('Service worker Activado');
 
-    console.log(e);
+   // Borrar la caché obsoleta
+   e.waitUntil(
+    caches.keys()
+        .then(keys => {
+            return Promise.all(
+                keys.filter( key => key !== nombreCache )
+                .map( key => caches.delete(key)) // Borra las versiones anteriores
+            )
+        })
+   )
 });
 
 
